@@ -1,11 +1,20 @@
-import React from 'react';
-
-const  App = () => {
+import React from "react";
+import { Container } from "react-bootstrap"; // Container makes content ceneter and horrzontally pad
+import HomeScreen from "./Screen/HomeScreen";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+const App = () => {
   return (
-    <div className="App">
-     <h1>Welcome </h1>
-    </div>
+    <>
+      <Header />
+      <main className = 'py-3'>
+        <Container>
+          <HomeScreen />
+        </Container>
+      </main>
+      <Footer />
+    </>
   );
-}
+};
 
 export default App;

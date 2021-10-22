@@ -6,7 +6,7 @@ const Header = () => {
   return (
   
       <header>
-        <Navbar bg='light' expand='lg' collapseOnSelect>
+        <Navbar bg='dark'  variant ='dark'expand='lg' collapseOnSelect>
           <Container >
             <LinkContainer to ='/'>
             <Navbar.Brand > <h1> <strong> WebBuy</strong>  </h1>  </Navbar.Brand>

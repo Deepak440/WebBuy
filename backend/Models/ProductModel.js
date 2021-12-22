@@ -22,7 +22,7 @@ const reviewsSchema = Schema({
 const productSchema = Schema({
 
     // Only admin can create product
-
+    // Which admin create the product
     user :{
 
         type :mongoose.Schema.Types.ObjectId,
@@ -33,6 +33,11 @@ const productSchema = Schema({
     name :{
         type : String,
         required :true 
+    },
+    image :{
+        type :String,
+        required : true
+
     },
     brand :{
         type : String,

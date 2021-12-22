@@ -1,0 +1,8 @@
+export const PRODUCT_LISTREQUEST = 'PRODUCT_LISTREQUEST';
+export const PRODUCT_LIST_SUCCESS = 'PRODUCT_LIST_SUCCESS';
+export const PRODUCT_LIST_FAILED = 'PRODUCT_LIST_FAILED';
+
+
+export const PRODUCT_Details_REQUEST = 'PRODUCT_Details_REQUEST';
+export const PRODUCT_Details_SUCCESS = 'PRODUCT_Details_SUCCESS';
+export const PRODUCT_Details_FAILED = 'PRODUCT_Details_FAILED';

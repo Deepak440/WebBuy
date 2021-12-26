@@ -3,9 +3,14 @@ import connectDB from './config/db.js';
 import  products  from './data/products.js';
 import dotenv from 'dotenv';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 
 const app = express();
+
+// Inbuilt middleware to parse data from body of request
+app.use(express.json());
+
 dotenv.config();
 // Db connection
 connectDB();
@@ -15,7 +20,11 @@ app.get('/' , (req ,res) => {
 }
 );
 
+
+//Routes
 app.use( '/api/products' , productRoutes);
+
+app.use('/api/users' , userRoutes );
 
 
 

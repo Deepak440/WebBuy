@@ -9,12 +9,19 @@ import Footer from "./components/Footer";
 import LoginScreen from "./Screen/LoginScreen";
 import RegisterScreen from "./Screen/RegisterScreen";
 import ProfileScreen from "./Screen/ProfileScren";
+import ShippingScreen from "./Screen/ShippingScreen";
+import PaymentScreen from "./Screen/PaymentScreeen";
+import PlaceorderScreen from "./Screen/PlaceorderScreen";
+
 const App = () => {
   return (
     <Router>
       <Header />
       <main className = 'py-3'>
         <Container>
+        <Route path ='/payment' component = {PaymentScreen}/>
+        <Route path ='/placeorder' component = {PlaceorderScreen}/>
+        <Route path ='/shipping' component = {ShippingScreen}/>
         <Route path ='/profile' component = {ProfileScreen}/>
         <Route path ='/register' component = {RegisterScreen}/>
         <Route path ='/login' component = {LoginScreen}/>

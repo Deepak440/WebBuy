@@ -51,7 +51,7 @@ const RegisterScreen = ({location , history}) => {
       {error && <Message variant = "danger"> {error}</Message> }
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
-      <FormGroup controlId='name'>
+      <FormGroup  className="mb-3"controlId='name'>
           <FormLabel> User Name</FormLabel>
           <FormControl
             type='name'
@@ -60,7 +60,7 @@ const RegisterScreen = ({location , history}) => {
             onChange={(e) => SetName(e.target.value)}
           ></FormControl>
         </FormGroup>
-        <FormGroup controlId='email'>
+        <FormGroup className="mb-3" controlId='email'>
           <FormLabel>Email Address</FormLabel>
           <FormControl
             type='email'
@@ -70,7 +70,7 @@ const RegisterScreen = ({location , history}) => {
           ></FormControl>
         </FormGroup>
 
-        <FormGroup controlId='password'>
+        <FormGroup className="mb-3" controlId='password'>
           <FormLabel>Password</FormLabel>
           <FormControl
             type='password'
@@ -80,7 +80,7 @@ const RegisterScreen = ({location , history}) => {
           ></FormControl>
         </FormGroup>
         
-        <FormGroup controlId='confirmPassword'>
+        <FormGroup className="mb-3" controlId='confirmPassword'>
           <FormLabel>Confirm Password</FormLabel>
           <FormControl
             type='password'

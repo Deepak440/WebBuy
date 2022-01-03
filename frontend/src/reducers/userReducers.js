@@ -61,7 +61,7 @@ case USER_UPDATE_PROFILE_REQUEST:
       return { loading: true };
 
     case USER_UPDATE_PROFILE_SUCCESS:
-      return { loading: false, sucess: true, user: action.payload };
+      return { loading: false, success: true, user: action.payload };
 
     case USER_UPDATE_PROFILE_FAIL:
       return { loading: false, error: action.payload };

@@ -32,6 +32,7 @@ const ProfileScreen = ({location , history}) => {
   // Check when user info is updated by showing the message
   const userUpdateProfile  = useSelector(state => state.userProfileUpadte);
   const {success} = userUpdateProfile;
+  
 
   // If the user is not loged in the redirect to the login route 
   useEffect( ()=> {
@@ -64,9 +65,11 @@ const ProfileScreen = ({location , history}) => {
       <Col>
       <h2>User Profile</h2>
       {message && <Message variant = "danger"> {message}</Message> }
-      {error && <Message variant = "danger"> {error}</Message> }
       {success && <Message variant = "success">Profile Updated</Message> }
       {loading && <Loader />}
+      {error && <Message variant = "danger"> {error}</Message> }
+     
+     
       <Form onSubmit={submitHandler}>
       <FormGroup controlId='name'>
           <FormLabel> User Name</FormLabel>

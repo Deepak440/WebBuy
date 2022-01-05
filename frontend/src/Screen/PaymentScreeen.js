@@ -18,7 +18,7 @@ const PaymentScreen = ({history}) => {
     }
     
     // Default method of payment
-    const [paymentMethod , SetPaymentMethod] = useState('PayPal');
+    const [paymentMethod , SetPaymentMethod] = useState("PayPal");
 
      
     const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const PaymentScreen = ({history}) => {
     const submitHandler = (e) => {
       e.preventDefault();
      // call dispatch for save shipping address
-     dispatch(savePaymentMethod(paymentMethod));
+     dispatch(savePaymentMethod({paymentMethod}));
 
      //  Move to the next page => placeorder
      history.push('/placeorder');

@@ -9,7 +9,7 @@ import Message from "../components/Message";
 const HomeScreen = () => {
   // Dispatch the action
   const dispatch = useDispatch();
-  const productlist =  useSelector(state => state.productList)
+  const productlist =  useSelector(state => state.productList);
   const {loading , error, products } = productlist;
 
 

@@ -5,7 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { userLoginReducer, userRegisterReducer, userDetailsReducer, userProfileUpadteReducer } from "./reducers/userReducers";
 import {productlistReducer , productDetailsReducer}  from './reducers/productReducers';
 import {cartReducer} from './reducers/cardReducer';
-import {orderCreateReducer} from './reducers/orderReducer'
+import {orderCreateReducer, orderDetailsReducer} from './reducers/orderReducer'
 // TO combine multiple reducer
 
 const reducer = combineReducers({
@@ -17,6 +17,7 @@ const reducer = combineReducers({
    userDetails : userDetailsReducer,
    userProfileUpadte : userProfileUpadteReducer,
     orderCreate     :  orderCreateReducer,
+    orderDetails : orderDetailsReducer,
 
    
   });

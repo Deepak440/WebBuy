@@ -27,34 +27,33 @@ const addDecimal = (num) => {
 
  cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2) ; 
 
- //to get the state after dsipatch action
- const orderCreate = useSelector(state => state.orderCreate);
+ //to get the state after dispatch action
+ const orderCreate = useSelector((state) => state.orderCreate);
  
  const {order , success , error } = orderCreate;
+
 
  useEffect(() => {
       
      if(success){
-       console.log(order);
-       history.push(`order/${order._id}`);  
+       
+       history.push(`/order/${order._id}`);  
      }
-    
- },[history, success, order] )
-
-
-
+     
+    // eslint-disable-next-line
+ },[history, success ] );
 
 
 const placeOrderHandler = () => {
     dispatch(createOrder({
-        orderItems : cart.orderItems,
+        orderItems : cart.cartItems,
         shippingAddress : cart.shippingAddress,
         paymentMethod : cart.paymentMethod,
         itemsPrice : cart.itemsPrice,
         shippingPrice : cart.shippingPrice,
         taxPrice : cart.taxPrice,
         totalPrice : cart.totalPrice
-    }))
+    }));
     
 }
     

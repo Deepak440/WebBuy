@@ -7,6 +7,7 @@ import {
   userRegisterReducer,
   userDetailsReducer,
   userProfileUpadteReducer,
+  userListReducer
 } from "./reducers/userReducers";
 import {
   productlistReducer,
@@ -33,6 +34,7 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   orderMyList: orderMyListReducer,
+  userList : userListReducer,
 });
 
 // Parse the string into the js object

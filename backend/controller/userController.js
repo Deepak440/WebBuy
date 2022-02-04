@@ -56,7 +56,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("User already exist");
   }
-  
+
   // Middleware is callled to hash passwrod and then data is saved
   const user = await User.create({
     name,
@@ -78,7 +78,6 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-
 // @desc : Update user Profile
 // @route : Put api/user/profile
 // @access Private
@@ -86,13 +85,13 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    user.name  = req.body.name || user.name;
+    user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    if(req.body.password){
-      user.password = req.body.password
+    if (req.body.password) {
+      user.password = req.body.password;
     }
 
-    const updatedUser = await  user.save();
+    const updatedUser = await user.save();
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
@@ -100,14 +99,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       isAdmin: updatedUser.isAdmin,
       token: generateToken(user._id),
     });
-
-    
   } else {
     res.status(404);
     throw new Error("User not found");
   }
 });
-
 
 // Only admin can access the users details
 
@@ -119,4 +115,26 @@ const getUsers = asyncHandler(async (req, res) => {
   res.json(users);
 });
 
-export { authUser, registerUser, getUserProfile, updateUserProfile, getUsers };
+// @desc : Delete user form Db
+// @route : Delete api/users/:id
+// @access Private/Admin
+
+const delteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    await user.remove();
+    res.json({ message: "User removed" });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+export {
+  authUser,
+  registerUser,
+  getUserProfile,
+  updateUserProfile,
+  getUsers,
+  delteUser,
+};

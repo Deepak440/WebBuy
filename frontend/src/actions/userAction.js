@@ -17,6 +17,7 @@ import {
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
+  USER_LIST_RESET,
 } from "../constants/userConstants";
 
 // User login Action
@@ -53,6 +54,7 @@ export const Logout = () => async (dispatch) => {
   dispatch({type: USER_LOGOUT});
   dispatch({type: USER_DETAILS_RESET});
   dispatch({type: ORDER_MYLIST_RESET});
+  dispatch({type: USER_LIST_RESET});
 
 };
 

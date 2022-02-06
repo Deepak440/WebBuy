@@ -1,10 +1,12 @@
 import  express from 'express';
 import connectDB from './config/db.js';
+import path from 'path';
 import  products  from './data/products.js';
 import dotenv from 'dotenv';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import uploadsRoutes from './routes/uploadsRoutes.js';
 
 
 
@@ -29,6 +31,12 @@ app.use( '/api/products' , productRoutes);
 app.use('/api/users' , userRoutes );
 
 app.use('/api/orders' , orderRoutes);
+app.use('/api/upload' , uploadsRoutes);
+
+
+// Make uploads folder static so that it can be accessible
+const __dirname = path.resolve();  // to make below line working with es module
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 
 const PORT = process.env.PORT || 5000;

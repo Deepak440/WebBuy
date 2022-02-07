@@ -174,6 +174,7 @@ const ProductScreen = ({ match , history}) => {
 
               <ListGroupItem>
                 <h2>Wrtite a Customer Review</h2>
+                {loadingProductReview && <Loader />}
                 {errorProductReview && <Message variant = 'danger'>{errorProductReview}</Message>}
                 {userInfo ? (
                   <Form onSubmit={submitHandler}>

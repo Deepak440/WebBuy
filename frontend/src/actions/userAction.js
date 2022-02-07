@@ -50,18 +50,26 @@ export const login = (email, password) => async (dispatch) => {
 
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
-    dispatch({ type: USER_LOGIN_FAIL, payload: error });
+    dispatch({
+      type: USER_LOGIN_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
   }
 };
 
 //User logout action
 export const Logout = () => async (dispatch) => {
   localStorage.removeItem("userInfo");
+  localStorage.removeItem("cartItems");
+  localStorage.removeItem("shippingAddress");
   dispatch({type: USER_LOGOUT});
   dispatch({type: USER_DETAILS_RESET});
   dispatch({type: ORDER_MYLIST_RESET});
   dispatch({type: USER_LIST_RESET});
-
+  document.location.href = '/login'
 };
 
 // User Register actions
@@ -95,7 +103,14 @@ export const Register = (name, email, password) => async (dispatch) => {
 
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
-    dispatch({ type: USER_REGISTER_FAIL, payload: error });
+
+    dispatch({
+      type: USER_REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
   }
 };
 

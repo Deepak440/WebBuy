@@ -8,6 +8,7 @@ import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import uploadsRoutes from './routes/uploadsRoutes.js';
+import { notFound , errorHandler } from './middleware/errorMiddleware.js';
 
 
 
@@ -43,6 +44,9 @@ app.use('/api/upload' , uploadsRoutes);
 // Make uploads folder static so that it can be accessible
 const __dirname = path.resolve();  // to make below line working with es module
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
+app.use(notFound)
+app.use(errorHandler)
 
 
 const PORT = process.env.PORT || 5000;

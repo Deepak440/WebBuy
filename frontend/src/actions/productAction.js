@@ -15,6 +15,9 @@ import {
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_FAILED,
+  PRODUCT_CREATE_REVIEWS_REQUEST,
+  PRODUCT_CREATE_REVIEWS_SUCCESS,
+  PRODUCT_CREATE_REVIEWS_FAILED,
 } from "../constants/productConstant";
 
 export const listProducts = () => async (dispatch) => {
@@ -131,6 +134,41 @@ export const updateProduct = (product) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_UPDATE_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.message.data.message
+          : error.message,
+    });
+  }
+};
+
+
+
+
+export const createProductReview = (productId , review) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PRODUCT_CREATE_REVIEWS_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type' :  'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    await axios.post(`/api/products/${productId}/reviews`, review, config);
+    
+    dispatch({
+      type: PRODUCT_CREATE_REVIEWS_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_CREATE_REVIEWS_FAILED,
       payload:
         error.response && error.response.data.message
           ? error.message.data.message

@@ -26,11 +26,11 @@ if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'));
 }
 
-app.get('/' , (req ,res) => {
-    res.send('API is runnning');
-}
-);
 
+
+// Make uploads folder static so that it can be accessible
+const __dirname = path.resolve();  // to make below line working with es module
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 //Routes
 app.use( '/api/products' , productRoutes);
@@ -41,9 +41,19 @@ app.use('/api/orders' , orderRoutes);
 app.use('/api/upload' , uploadsRoutes);
 
 
-// Make uploads folder static so that it can be accessible
-const __dirname = path.resolve();  // to make below line working with es module
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '/frontend/build')))
+  
+    app.get('*', (req, res) =>
+      res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+    )
+  } else {
+    app.get('/', (req, res) => {
+      res.send('API is running....')
+    })
+  }
+  
+
 
 app.use(notFound)
 app.use(errorHandler)

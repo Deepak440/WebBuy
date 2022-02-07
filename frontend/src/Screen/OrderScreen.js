@@ -1,19 +1,26 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card, ListGroupItem ,Button} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/loader";
 
-import { getOrderDetails } from "../actions/orderAction";
+import { getOrderDetails, deliverOrder } from "../actions/orderAction";
+import { ORDER_DELIVER_RESET } from "../constants/orderConstants";
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = ({ match , history }) => {
   const orderId = match.params.id;
 
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { success: succesDeliver,  loading : loadingDeliver } = orderDeliver;
 
   // Calculate the prices
 
@@ -29,10 +36,22 @@ const OrderScreen = ({ match }) => {
   }
 
   useEffect(() => {
-    if(!order || order._id !== orderId) {
-    dispatch(getOrderDetails(orderId));
+    if(!userInfo){
+      history.push('/login')
     }
-  }, [dispatch ,order , orderId]);
+    if(!order || order._id !== orderId || succesDeliver) {
+      dispatch({type  : ORDER_DELIVER_RESET})
+      dispatch(getOrderDetails(orderId));
+    
+    }
+  }, [dispatch ,order , orderId, succesDeliver]);
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order));
+  }
+
+
+
 
   return loading ? (
     <Loader />
@@ -140,6 +159,18 @@ const OrderScreen = ({ match }) => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+
+              {loadingDeliver && <Loader /> }
+              {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                <ListGroupItem>
+                  <Button
+                   type ='button'
+                   className = 'btn btn-block'
+                   OnClick= {deliverHandler}>
+                    Mark As Deliverd
+                  </Button>
+                </ListGroupItem>
+              )}
             </ListGroup>
           </Card>
         </Col>

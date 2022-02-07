@@ -107,10 +107,11 @@ const updateProduct = asyncHandler(async (req, res) => {
 const createProductReviews = asyncHandler(async (req, res) => {
   
   const {
-    rating ,
+    rating,
     comment
   } = req.body;
 
+  
   const product = await Product.findById(req.params.id);
 
   if(product){
@@ -131,10 +132,13 @@ const createProductReviews = asyncHandler(async (req, res) => {
       user : req.user._id,
 
     }
+    
+
+  
     product.reviews.push(review);
     product.numReviews = product.reviews.length
     // Overall rating of the product
-    product.rating = product.reviews.reduce((acc, item) => item.rating + acc )/product.reviews.length;
+    product.rating = product.reviews.reduce((acc, item) => item.rating + acc, 0)/product.reviews.length;
 
     await product.save();
     res.status(201).json({message : "Reviews added"});

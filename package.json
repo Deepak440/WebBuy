@@ -4,6 +4,7 @@
   "description": "Online Shop",
   "main": "sever.js",
   "type": "module",
+  "engines": { "node": ">=12.19.0" },
   "scripts": {
     "start": " node backend/server",
     "server": "nodemon backend/server",

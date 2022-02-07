@@ -1,6 +1,7 @@
 import  express from 'express';
 import connectDB from './config/db.js';
 import path from 'path';
+import morgan from 'morgan';
 import  products  from './data/products.js';
 import dotenv from 'dotenv';
 import productRoutes from './routes/productRoutes.js';
@@ -18,6 +19,11 @@ app.use(express.json());
 dotenv.config();
 // Db connection
 connectDB();
+
+
+if(process.env.NODE_ENV === 'development'){
+    app.use(morgan('dev'));
+}
 
 app.get('/' , (req ,res) => {
     res.send('API is runnning');

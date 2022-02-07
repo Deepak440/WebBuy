@@ -18,6 +18,7 @@ import {
   productCreateReducer,
   productUpdateReducer,
   productReviewCreateReducer,
+  productTopRatedReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cardReducer";
 import {
@@ -51,6 +52,7 @@ const reducer = combineReducers({
   productCreate : productCreateReducer,
   productUpdate : productUpdateReducer,
   productReviewCreate : productReviewCreateReducer,
+  productTopRated : productTopRatedReducer,
 });
 
 // Parse the string into the js object
